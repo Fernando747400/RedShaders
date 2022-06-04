@@ -5,97 +5,133 @@ using UnityEngine;
 public class GatchaSystem : MonoBehaviour
 {
     [Header ("Dependencies")]
-    [SerializeField] private GameObject[] _tazos = new GameObject[25];
+    [SerializeField] private GameObject[] _tazosArray = new GameObject[1];
     [SerializeField] private GameObject _chipBag;
     [SerializeField] private GameObject _tazoPosition;
     [SerializeField] private GameObject _chipsParticles;
 
     [Header("Settings")]
-    [SerializeField] private Vector3 _initialPosition;
-    [SerializeField] private Vector3 _centerPosition;
-    [SerializeField] private Vector3 _finalPosition;
+
+    [Header("Random selection")]
+    [SerializeField] private bool _randomTazoSelection;
+
+    [Header("Chipbag position vectors")]
+    [SerializeField] private Vector3 _initialBagPosition;
+    [SerializeField] private Vector3 _centerCameraPosition;
+    [SerializeField] private Vector3 _finalBagPosition;
+
+    [Header("Tazo position vectors")]
+    [SerializeField] private Vector3 _centerTazoPosition;
     [SerializeField] private Vector3 _finalTazoPosition;
-    [SerializeField] private Vector3 _removeTazoPosition;
+
+    [Header("Chips explosion position")]
     [SerializeField] private Transform _chipsExplosionPosition;
 
     private Animator _chipAnimator;
-    private GameObject _currentTazo;
+    private GameObject _currentPickedTazo;
+    private Queue _tazosQueue = new Queue();
 
     private void Start()
     {
         _chipAnimator = _chipBag.GetComponent<Animator>();
+        AddToQueue();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (_currentTazo != null) RemoveTazo();
-            InstantiateChipBag();
+            OpenNewBag();
         }
     }
 
+    public void OpenNewBag()
+    {
+        if (_currentPickedTazo != null) RemoveTazo();
+        NewChipBag();
+    }
+
+
+    public void NewChipBag()
+    {
+        if(_chipAnimator != null) _chipAnimator.SetTrigger("EmptyState");
+        _chipBag.transform.position = _initialBagPosition;
+        _chipBag.transform.rotation = Quaternion.Euler(Vector3.zero);
+
+        iTween.MoveTo(_chipBag, iTween.Hash("position",_centerCameraPosition,"time", 3f, "oncomplete", "AnimateChipBag", "oncompletetarget", this.gameObject));
+    }
+   
+    public void AnimateChipBag()
+    {
+        if(_chipAnimator!= null) _chipAnimator.SetTrigger("OpenBag");
+    }
+
+
+    public void PickTazo() //this method is called by the ChipBag animator event. 
+    {
+        _tazoPosition.transform.position = Vector3.zero;
+
+        if (_randomTazoSelection)
+        {
+            _currentPickedTazo = GameObject.Instantiate(PickRandomTazo(_tazosArray), _tazoPosition.transform);
+        }
+        else
+        {
+            _currentPickedTazo = GameObject.Instantiate(PickNextTazo());
+        }
+        AnimateTazo();
+    }
     public GameObject PickRandomTazo(GameObject[] list)
     {
        return list[Random.Range(0, list.Length)];
     }
 
-    public void InstantiateChipBag()
+    public GameObject PickNextTazo()
     {
-        _chipBag.transform.position = _initialPosition;
-        _chipBag.transform.rotation = Quaternion.Euler(Vector3.zero);
-        _chipAnimator.SetTrigger("EmptyState");
-
-        iTween.MoveTo(_chipBag, iTween.Hash("position",_centerPosition,"time", 3f, "oncomplete", "AnimateChipBag", "oncompletetarget", this.gameObject));
-    }
-   
-    public void AnimateChipBag()
-    {
-        if(_chipAnimator!= null)
-        {
-        _chipAnimator.SetTrigger("OpenBag");
-        }
-    }
-
-    public void PickTazo()
-    {
-        _tazoPosition.transform.position = Vector3.zero;
-        _currentTazo = GameObject.Instantiate(PickRandomTazo(_tazos), _tazoPosition.transform);
-        AnimateTazo();
+        if (_tazosQueue.Count == 0) AddToQueue();
+        GameObject temp = (GameObject)_tazosQueue.Peek();
+        _tazosQueue.Dequeue();
+        return temp;
     }
 
     public void AnimateTazo()
     {
-        iTween.MoveTo(_currentTazo, iTween.Hash("position", _finalTazoPosition, "time", 2f,"delay", 2.5f, "oncomplete", "RotateTazo", "oncompletetarget", this.gameObject));
+        iTween.MoveTo(_currentPickedTazo, iTween.Hash("position", _centerTazoPosition, "time", 2f,"delay", 2.5f, "oncomplete", "RotateTazo", "oncompletetarget", this.gameObject));
     }
 
     public void RemoveTazo()
     {
-        iTween.MoveTo(_currentTazo, iTween.Hash("position", _removeTazoPosition, "time", 1f, "oncomplete", "DeleteTazo", "oncompletetarget", this.gameObject));
+        iTween.MoveTo(_currentPickedTazo, iTween.Hash("position", _finalTazoPosition, "time", 1f, "oncomplete", "DeleteTazo", "oncompletetarget", this.gameObject));
     }
 
     public void DeleteTazo()
     {
-        Destroy(_currentTazo.gameObject);
+        Destroy(_currentPickedTazo.gameObject);
     }
 
 
     public void RotateTazo()
     {
-        _currentTazo.gameObject.AddComponent<Cube_Rotation>();
-        Cube_Rotation currentRotator = _currentTazo.gameObject.GetComponent<Cube_Rotation>();
+        _currentPickedTazo.gameObject.AddComponent<Cube_Rotation>();
+        Cube_Rotation currentRotator = _currentPickedTazo.gameObject.GetComponent<Cube_Rotation>();
         currentRotator.Speed = 5;
         currentRotator.xRotation = 0;
         currentRotator.yRotation = 0;
         currentRotator.zRotation = 5;
     }
 
-    public void FinishAnimation()
+    public void FinishAnimation() //This method is called by the ChipBag animator event
     {
         GameObject.Instantiate(_chipsParticles, _chipsExplosionPosition);
-        iTween.MoveTo(_chipBag,_finalPosition, 4f);
+        iTween.MoveTo(_chipBag,_finalBagPosition, 4f);
     }
 
-    
-
+    private void AddToQueue()
+    {
+        if(_tazosQueue.Count != 0)_tazosQueue.Clear();
+        foreach (var tazo in _tazosArray)
+        {
+            _tazosQueue.Enqueue(tazo);
+        }
+    }
 }
