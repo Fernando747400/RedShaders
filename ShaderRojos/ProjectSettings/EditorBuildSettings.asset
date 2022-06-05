@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/04_Tazos.unity
+    guid: 40510f2c3cad0194caac6c9e7f25c7ab
   m_configObjects: {}
