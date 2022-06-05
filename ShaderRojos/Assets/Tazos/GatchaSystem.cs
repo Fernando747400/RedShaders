@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GatchaSystem : MonoBehaviour
 {
@@ -10,14 +11,17 @@ public class GatchaSystem : MonoBehaviour
     [SerializeField] private GameObject _tazoPosition;
     [SerializeField] private GameObject _chipsParticles;
 
-    [Header("Settings")]
+    [Header("UI Dependencies")]
+    [SerializeField] private Button _openButton;
 
     [Header("Random selection")]
+    [Header("Settings")]
     [SerializeField] private bool _randomTazoSelection;
+    [SerializeField] private float _turningSpeed;
 
     [Header("Chipbag position vectors")]
     [SerializeField] private Vector3 _initialBagPosition;
-    [SerializeField] private Vector3 _centerCameraPosition;
+    [SerializeField] private Vector3 _centerBagPosition;
     [SerializeField] private Vector3 _finalBagPosition;
 
     [Header("Tazo position vectors")]
@@ -30,16 +34,18 @@ public class GatchaSystem : MonoBehaviour
     private Animator _chipAnimator;
     private GameObject _currentPickedTazo;
     private Queue _tazosQueue = new Queue();
+    private bool _onCooldown;
 
     private void Start()
     {
         _chipAnimator = _chipBag.GetComponent<Animator>();
         AddToQueue();
+        _onCooldown = false;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !_onCooldown)
         {
             OpenNewBag();
         }
@@ -48,17 +54,19 @@ public class GatchaSystem : MonoBehaviour
     public void OpenNewBag()
     {
         if (_currentPickedTazo != null) RemoveTazo();
-        NewChipBag();
+        _openButton.interactable = false;
+        _onCooldown = true;
+        FirstChipBagAnimation();
     }
 
 
-    public void NewChipBag()
+    public void FirstChipBagAnimation()
     {
         if(_chipAnimator != null) _chipAnimator.SetTrigger("EmptyState");
         _chipBag.transform.position = _initialBagPosition;
         _chipBag.transform.rotation = Quaternion.Euler(Vector3.zero);
 
-        iTween.MoveTo(_chipBag, iTween.Hash("position",_centerCameraPosition,"time", 3f, "oncomplete", "AnimateChipBag", "oncompletetarget", this.gameObject));
+        iTween.MoveTo(_chipBag, iTween.Hash("position",_centerBagPosition,"time", 3f, "oncomplete", "AnimateChipBag", "oncompletetarget", this.gameObject));
     }
    
     public void AnimateChipBag()
@@ -114,10 +122,12 @@ public class GatchaSystem : MonoBehaviour
     {
         _currentPickedTazo.gameObject.AddComponent<Cube_Rotation>();
         Cube_Rotation currentRotator = _currentPickedTazo.gameObject.GetComponent<Cube_Rotation>();
-        currentRotator.Speed = 5;
+        currentRotator.Speed = _turningSpeed;
         currentRotator.xRotation = 0;
         currentRotator.yRotation = 0;
         currentRotator.zRotation = 5;
+        _onCooldown = false;
+        _openButton.interactable = true;
     }
 
     public void FinishAnimation() //This method is called by the ChipBag animator event
@@ -133,5 +143,10 @@ public class GatchaSystem : MonoBehaviour
         {
             _tazosQueue.Enqueue(tazo);
         }
+    }
+
+    public void TogggleRandom()
+    {
+        _randomTazoSelection = !_randomTazoSelection;
     }
 }
