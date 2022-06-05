@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: de80e5860772d8d459154a411c766c47
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - Circles_Texture: {fileID: 2800000, guid: ebbbab9823eaf8b4187bddba8068c4f2, type: 3}
+  - Rainbow_Texture: {fileID: 2800000, guid: 3df2993b153253c4388083944328eccb, type: 3}
+  - unity_Lightmaps: {instanceID: 0}
+  - unity_LightmapsInd: {instanceID: 0}
+  - unity_ShadowMasks: {instanceID: 0}
+  nonModifiableTextures:
+  - _Texture2DAsset_3da18e49c74647f59ba87dcaae530347_Out_0: {fileID: 2800000, guid: 3df2993b153253c4388083944328eccb, type: 3}
+  - _Texture2DAsset_01b9a0b31f224c75878f124f4a30dd66_Out_0: {fileID: 2800000, guid: d15eae9a225c3c746b111b0f53d2924b, type: 3}
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
