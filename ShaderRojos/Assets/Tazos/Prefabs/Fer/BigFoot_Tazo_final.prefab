@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 4812939454159370026}
   - component: {fileID: 8459208688462117007}
   - component: {fileID: 5945264096751275077}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BigFoot_Tazo_final
   m_TagString: Untagged
   m_Icon: {fileID: 0}

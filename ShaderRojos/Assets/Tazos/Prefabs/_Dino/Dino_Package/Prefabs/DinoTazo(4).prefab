@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 2685547703973287228}
   - component: {fileID: 1363219584227646105}
   - component: {fileID: 3823511780356681299}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DinoTazo(4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

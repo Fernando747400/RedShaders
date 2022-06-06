@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 5709022902742718495}
   - component: {fileID: 8688953861802792890}
   - component: {fileID: 6877465889333273456}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Skeleton_Tazo_final
   m_TagString: Untagged
   m_Icon: {fileID: 0}

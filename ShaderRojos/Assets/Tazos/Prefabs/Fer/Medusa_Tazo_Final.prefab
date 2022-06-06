@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 4788670539679949107}
   - component: {fileID: 8492414410077204118}
   - component: {fileID: 5926713610446281308}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Medusa_Tazo_Final
   m_TagString: Untagged
   m_Icon: {fileID: 0}

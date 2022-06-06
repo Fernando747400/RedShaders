@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 7776128042604959563}
   - component: {fileID: 6648862073128425710}
   - component: {fileID: 8908533057992256548}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Scum_Tazo_final
   m_TagString: Untagged
   m_Icon: {fileID: 0}
