@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 5562621547353018930}
   - component: {fileID: 8835426152381554071}
   - component: {fileID: 6735496149919525213}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 01 The Great Beast 666
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -586,7 +586,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: -876546973899608171, guid: 2b63c58336edc844da86e7d13f56b969, type: 3}
-  - {fileID: 4874126678125670354, guid: 2b63c58336edc844da86e7d13f56b969, type: 3}
+  - {fileID: 2100000, guid: 23e72b8e30cdfbf41b1ffe95562d894d, type: 2}
   - {fileID: 2100000, guid: af3b376c431a4fd4b916faeff6570bf8, type: 2}
   - {fileID: -3846018093981099296, guid: 2b63c58336edc844da86e7d13f56b969, type: 3}
   m_StaticBatchInfo:

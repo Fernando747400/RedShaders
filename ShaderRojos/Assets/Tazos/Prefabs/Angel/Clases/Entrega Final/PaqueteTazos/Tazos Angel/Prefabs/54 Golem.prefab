@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 8257651518356538860}
   - component: {fileID: 4987395581146319433}
   - component: {fileID: 7120822760741584515}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 54 Golem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: -876546973899608171, guid: 2b63c58336edc844da86e7d13f56b969, type: 3}
-  - {fileID: 4874126678125670354, guid: 2b63c58336edc844da86e7d13f56b969, type: 3}
+  - {fileID: 2100000, guid: 23e72b8e30cdfbf41b1ffe95562d894d, type: 2}
   - {fileID: 2100000, guid: af3b376c431a4fd4b916faeff6570bf8, type: 2}
   - {fileID: -3846018093981099296, guid: 2b63c58336edc844da86e7d13f56b969, type: 3}
   m_StaticBatchInfo:
@@ -251,6 +251,10 @@ PrefabInstance:
     - target: {fileID: 2239936749868210625, guid: 2c9b0ba897e2b8d45ab894f4389f15cb, type: 3}
       propertyPath: m_Name
       value: Golem
+      objectReference: {fileID: 0}
+    - target: {fileID: 2239936749868210625, guid: 2c9b0ba897e2b8d45ab894f4389f15cb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4502635776858638300, guid: 2c9b0ba897e2b8d45ab894f4389f15cb, type: 3}
       propertyPath: m_Materials.Array.data[0]
