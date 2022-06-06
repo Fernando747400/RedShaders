@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Galaxy_Dino
+  m_Shader: {fileID: -6465566751694194690, guid: 4c70a8df8fcecdb4baad2cc16bc8a630, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Cubemap_23841cc2f32843f0ad5e46c99e402a58:
+        m_Texture: {fileID: 8900000, guid: b0f4dd3eed38f994092aa778583094b5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Cubemap_e7167583a44d4a90a2b5515f6e9211df:
+        m_Texture: {fileID: 8900000, guid: f30344a062e6cb443a428a7be33cfc16, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_8e3fada575b2407d93028d9a5ad159f7: 20
+    - Vector1_a39b82a26f424c7ea3e66ae2bec326e1: 2
+    - Vector1_b8b787fa4dc5456bbe87781a6a11800d: 0.1
+    - Vector1_c2d74fc7864e41b7b20807c36d006263: 3
+    m_Colors:
+    - Color_027a2032c5e544bcb99e8e3e85767f07: {r: 0.261578, g: 0.1764418, b: 0.5754717, a: 0}
+    - Color_0b92889875dd4065b41b3d936b4a2e4b: {r: 1, g: 0.9481132, b: 0.94862676, a: 0}
+    - Color_2fad53af86e240a58e44fb7a05d54608: {r: 293.56226, g: 2133.0815, b: 0, a: 1}
+  m_BuildTextureStacks: []
